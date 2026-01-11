@@ -6,4 +6,5 @@ from shortener import views
 app_name = "shortener"
 urlpatterns = [
     path("", views.CreateShortUrlView.as_view(), name="create-short-url"),
+    path("<str:code>/", views.RedirectByURLCode.as_view(), name="redirect-short-url"),
 ]

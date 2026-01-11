@@ -41,3 +41,14 @@ def create_custom_short_url(data: dict) -> str:
     """
     ShortUrl.objects.create(url=data["url"], code=data["code"], custom_code=True)
     return f"http://127.0.0.1:8000/{data['code']}/"
+
+
+def get_url_by_code(code: str) -> str | None:
+    """
+    Получает ShortUrl из БД по коду code и возвращает URL для редиректа.
+    """
+    try:
+        short_url = ShortUrl.objects.get(code=code)
+    except ShortUrl.DoesNotExist:
+        return None
+    return short_url.url
