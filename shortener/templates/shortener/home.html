@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "shortener/css/style.css" %}">
+{% endblock extra_head %}
+
+{% block title %}Главная{% endblock title %}
+
+{% block content %}
+<div class="info-section">
+    <h1>Удобный сервис для сокращения ссылок</h1>
+    <p class="lead">
+        Превращайте длинные URL в короткие и удобные ссылки за секунды. 
+    </p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Просто</h3>
+            <p>Вставьте ссылку — получите короткий URL. Никаких сложных настроек.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Быстро</h3>
+            <p>Сокращение занимает меньше секунды.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Свои названия</h3>
+            <p>Возможность создавать ссылки со своим названием.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Профиль</h3>
+            <p>Профиль со всеми вашими созданными ссылками.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Редактирование</h3>
+            <p>Возможность редактировать свои ссылки.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Время жизни</h3>
+            <p>Создание ссылок с временем жизни.</p>
+        </div>
+    </div>
+    <div class="cta-container">
+        <a href="#" class="btn-cta">Перейти к сокращателю</a>
+    </div>
+</div>
+{% endblock content %}

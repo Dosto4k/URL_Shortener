@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django_extensions",
     # Apps
     "users.apps.UsersConfig",
+    "shortener.apps.ShortenerConfig",
 ]
 
 MIDDLEWARE = [
@@ -99,8 +100,6 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-# Временно на home
-LOGIN_REDIRECT_URL = "home"
-
+LOGIN_REDIRECT_URL = "shortener:home"
 LOGIN_URL = "users:login"
 LOGOUT_REDIRECT_URL = "users:login"

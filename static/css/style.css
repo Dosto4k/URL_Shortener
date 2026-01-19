@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .header {
@@ -74,3 +74,9 @@ body {
     color: #e60000 !important;
 }
 
+body {
+  overflow: overlay; /* или overflow-y: overlay */
+}
+::-webkit-scrollbar {
+  display: none;
+}
