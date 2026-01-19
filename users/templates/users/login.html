@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "users/css/style.css" %}">
+{% endblock extra_head %}
+
+{% block title %}Авторизация{% endblock title %}
+
+
+{% block content %}
+<div class="login-container">
+    <form class="login-form" action="{% url "users:login" %}" method="POST">
+        <h2>Авторизация</h2>
+        {% if form.non_field_errors %}
+        {{form.non_field_errors}}
+        <br>
+        {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="input-group">
+            {{field.label_tag}}
+            {% if field.errors %}
+            {{field.errors}}
+            <br>
+            {% endif %}
+            {{field}}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn-login">Войти</button>
+        <div class="links">
+            <a href="#" class="link-forgot">Забыли пароль?</a>
+            <a href="{% url "users:register" %}" class="link-register">Зарегистрироваться</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

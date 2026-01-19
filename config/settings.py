@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     # dev tools
     "debug_toolbar",
     "django_extensions",
+    # Apps
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -50,7 +52,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -95,3 +97,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# Временно на home
+LOGIN_REDIRECT_URL = "home"
+
+LOGIN_URL = "users:login"
+LOGOUT_REDIRECT_URL = "users:login"
