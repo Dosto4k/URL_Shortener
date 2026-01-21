@@ -13,6 +13,7 @@
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a href="{% url "shortener:home" %}" class="nav-link">Главная</a></li>
+                <li class="nav-item"><a href="{% url "shortener:create-short-url" %}" class="nav-link">Сокращатель</a></li>
             </ul>
             {% if user.is_authenticated %}
             <div class="nav-right">

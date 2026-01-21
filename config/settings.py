@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from string import ascii_letters, digits
 
 from dotenv import load_dotenv
 
@@ -103,3 +104,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 LOGIN_REDIRECT_URL = "shortener:home"
 LOGIN_URL = "users:login"
 LOGOUT_REDIRECT_URL = "users:login"
+
+URL_CODE_ALLOWED_CHARS = ascii_letters + digits + "-_"
+URL_CODE_LENGTH = 8
