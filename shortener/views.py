@@ -4,7 +4,7 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views.generic import TemplateView, FormView, View
+from django.views.generic import TemplateView, FormView, View, RedirectView
 
 from shortener.exceptions import GenerateURLCodeError
 from shortener.forms import CreateShortUrlForm
@@ -59,3 +59,11 @@ class CreateShortURLDone(LoginRequiredMixin, View):
             "short_url": short_url,
         }
         return render(request, "shortener/create_short_url_done.html", context)
+
+
+class RedirectByShortUrl(RedirectView):
+    permanent = True
+
+    def get_redirect_url(self, **kwargs) -> str:  # noqa:ANN003
+        short_url = get_object_or_404(ShortURL, code=kwargs.get("code"))
+        return short_url.url
