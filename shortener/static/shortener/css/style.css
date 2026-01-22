@@ -232,6 +232,7 @@ main {
     text-decoration: none;
     font-size: 15px;
     cursor: pointer;
+    word-break: break-all;
 }
 
 .success-link:hover {
