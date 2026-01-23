@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const customNameInput = document.getElementById('id_custom_code');
+    const customNameInput = document.getElementById('id_code');
     const blockWithpreviewField = document.getElementById('block-field-preview')
     const previewField = document.getElementById('preview-field');
 

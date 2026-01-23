@@ -1,21 +1,26 @@
+from typing import Any
+
 from django import forms
 
-from shortener.validators import custom_code_contains_only_allowed_chars, is_unique_code
+from shortener.exceptions import RetryLimitReachedError
+from shortener.models import ShortURL
+from shortener.services import generate_unique_code
 
 
-class CreateShortUrlForm(forms.Form):
-    url = forms.URLField()
-    custom_code = forms.CharField(label="Пользовательское имя", required=False)
+class CreateShortUrlForm(forms.ModelForm):
+    def clean(self) -> dict[str, Any]:
+        if not self.cleaned_data["code"]:
+            try:
+                self.cleaned_data["code"] = generate_unique_code()
+            except RetryLimitReachedError:
+                self.add_error(
+                    field="code",
+                    error=forms.ValidationError(
+                        "Не удалось создать короткий URL. Попробуйте ещё раз."
+                    ),
+                )
+        return super().clean()
 
-    def clean_custom_code(self) -> str:
-        code = self.cleaned_data["custom_code"]
-        if code == "":
-            return ""
-        if not custom_code_contains_only_allowed_chars(code):
-            raise forms.ValidationError(
-                "В пользовательском имени разрешены строчные и заглавные "
-                "буквы английского алфавита, символы «-» и «_» и цифры."
-            )
-        if not is_unique_code(code):
-            raise forms.ValidationError("Указанное пользовательское имя уже занято.")
-        return code
+    class Meta:
+        model = ShortURL
+        fields = ["url", "code"]

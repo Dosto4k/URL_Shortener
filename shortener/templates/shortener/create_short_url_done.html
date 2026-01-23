@@ -12,12 +12,10 @@
 <div class="success-card">
     <div class="success-title">Ссылка успешно создана!</div>
     <div class="success-message">Cсылка была успешно добавлена в ваш профиль.</div>
-    {% if short_url.is_custom %}
     <div class="success-message">
-        <p>Пользовательское имя:</p>
+        <p>URL код:</p>
         <b>{{short_url.code}}</b> 
     </div>
-    {% endif %}
     <div class="success-message">
         <p>Короткая ссылка:</p>
         {% with href_url='http://127.0.0.1:8000/u/'|add:short_url.code|add:'/' %}
