@@ -15,6 +15,7 @@ class ShortURL(models.Model):
         blank=True,
         validators=[code_contains_only_allowed_chars],
         error_messages={"unique": "Указанный URL код уже существует."},
+        db_index=True,
     )
     owner = models.ForeignKey(
         get_user_model(),
