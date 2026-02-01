@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "shortener/css/style.css" %}">
+{% endblock extra_head %}
+
+{% block title %}Список коротких URL{% endblock title %}
+
+
+{% block content %}
+<div class="list-url-container">
+    <h2 class="short-urls-title">Список коротких URL</h2>
+    <div class="short-urls-container">
+        {% for url in object_list %}
+        <div class="short-url-card-container">
+            <div class="short-url-card">
+                <div class="short-url-card-main-info">
+                    <div class="short-url-card-short-url">
+                        {% with short_url='http://127.0.0.1:8000/u/'|add:url.code|add:'/' %}
+                        <a class="url" href="{{short_url}}">{{short_url}}</a>
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="short-url-card-actions">
+                    <a href="#" class="short-url-action-button">✏️</a>
+                    <a href="#" class="short-url-action-button">🗑️</a>
+                </div>
+                <div class="short-url-card-destination-url">
+                    <p class="short-url-curved-arrow">⤷</p><a class="url" href="{{url.url}}">{{url.url}}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination-container">
+        <ul class="paginator-block">
+            <div class="paginator-left-side">
+                {% if page_obj.number != 1 %}
+                <li class="page-item"><a href="?page=1" class="page-link">1</a></li>
+                {% endif %}
+                {% if page_obj.number > 3 %}
+                <li class="page-item"><p class="page-link disabled">...</p></li>
+                {% endif %}
+                {% if page_obj.number > 2 %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.previous_page_number}}" class="page-link">
+                    {{page_obj.previous_page_number}}
+                    </a>
+                </li>
+                {% endif %}
+            </div>
+            <div class="paginator-middle-side">
+                <li class="page-item"><p class="page-link active">{{page_obj.number}}</p></li>
+            </div>
+            <div class="paginator-right-side">
+                {% if page_obj.number < paginator.num_pages|add:-1 %}
+                <li class="page-item">
+                    <a href="?page={{page_obj.number|add:1}}" class="page-link">
+                    {{page_obj.number|add:1}}
+                    </a>
+                </li>
+                {% endif %}
+                {% if page_obj.number < paginator.num_pages|add:-2 %}
+                <li class="page-item">
+                    <p class="page-link disabled">...</p>
+                </li>
+                {% endif %}
+
+                {% if page_obj.number != paginator.num_pages %}
+                <li class="page-item">
+                    <a href="?page={{paginator.num_pages}}" class="page-link">{{paginator.num_pages}}</a>
+                </li>
+                {% endif %}
+            </div>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

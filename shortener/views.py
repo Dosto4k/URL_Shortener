@@ -1,10 +1,13 @@
+from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.db.models.query import QuerySet
 from django.http import Http404
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views.generic import TemplateView, View, RedirectView, CreateView
+from django.views.generic import TemplateView, View, RedirectView, CreateView, ListView
 
 from shortener.forms import CreateShortUrlForm
 from shortener.models import ShortURL
@@ -56,3 +59,12 @@ class RedirectByShortUrl(RedirectView):
     def get_redirect_url(self, **kwargs) -> str:  # noqa:ANN003
         short_url = get_object_or_404(ShortURL, code=kwargs.get("code"))
         return short_url.url
+
+
+class ListShortURL(LoginRequiredMixin, ListView):
+    template_name = "shortener/list_short_url.html"
+    paginator_class = Paginator
+    paginate_by = 4
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return ShortURL.objects.filter(owner=self.request.user)

@@ -28,7 +28,7 @@
     </div>
     <div class="success-btn-container">
         <a class="success-btn" href="{% url "shortener:create-short-url" %}">Создать новую ссылку</a>
-        <a class="success-btn" href="#">Профиль</a>
+        <a class="success-btn" href="{% url "shortener:list-short-url" %}">Список ссылок</a>
     </div>
 </div>
 {% endblock content %}
