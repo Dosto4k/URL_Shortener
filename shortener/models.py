@@ -7,6 +7,7 @@ from shortener.validators import code_contains_only_allowed_chars
 
 
 class ShortURL(models.Model):
+    title = models.CharField(verbose_name="Название", blank=True)
     url = models.URLField(verbose_name="URL")
     code = models.CharField(
         verbose_name="URL код",

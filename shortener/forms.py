@@ -4,7 +4,7 @@ from django import forms
 
 from shortener.exceptions import RetryLimitReachedError
 from shortener.models import ShortURL
-from shortener.services import generate_unique_code
+from shortener.services import generate_unique_code, get_url_title
 
 
 class CreateShortUrlForm(forms.ModelForm):
@@ -19,8 +19,14 @@ class CreateShortUrlForm(forms.ModelForm):
                         "Не удалось создать короткий URL. Попробуйте ещё раз."
                     ),
                 )
+        if not self.cleaned_data["title"]:
+            self.cleaned_data["title"] = get_url_title(self.cleaned_data["url"])
         return super().clean()
 
     class Meta:
         model = ShortURL
-        fields = ["url", "code"]
+        fields = ["url", "title", "code"]
+        labels = {
+            "title": "Название (Не обязательно)",
+            "code": "URL код (Не обязательно)",
+        }
