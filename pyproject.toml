@@ -18,3 +18,23 @@ dev = [
     "pre-commit>=4.5.1",
     "python-dotenv>=1.2.1",
 ]
+
+[tool.ruff]
+exclude = [
+    'migrations'
+]
+
+[tool.ruff.lint]
+select = [
+    "ANN", "FAST", "ASYNC", "B",
+    "A", "EXE", "ISC", "T20",
+    "Q", "RET", "SIM", "TID",
+    "ARG", "C90", "N", "E",
+    "W", "F", "S", "I"
+]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library", "third-party", "django", "first-party", "local-folder"]

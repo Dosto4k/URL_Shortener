@@ -1,13 +1,20 @@
 from typing import Any
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models.query import QuerySet
 from django.http import Http404
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views.generic import TemplateView, View, RedirectView, CreateView, ListView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    RedirectView,
+    TemplateView,
+    View,
+)
 
 from shortener.forms import CreateShortUrlForm
 from shortener.models import ShortURL

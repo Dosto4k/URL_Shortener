@@ -4,7 +4,6 @@ from string import ascii_letters, digits
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 

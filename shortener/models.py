@@ -1,7 +1,7 @@
 from typing import Self
 
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 from shortener.validators import code_contains_only_allowed_chars
 

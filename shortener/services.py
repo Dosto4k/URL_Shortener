@@ -4,9 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from shortener.decorators import retry
-from shortener.exceptions import (
-    URLCodeIsAlreadyExistsError,
-)
+from shortener.exceptions import URLCodeIsAlreadyExistsError
 from shortener.models import ShortURL
 from shortener.utils import generate_code
 
