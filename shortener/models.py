@@ -2,6 +2,7 @@ from typing import Self
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 
 from shortener.validators import code_contains_only_allowed_chars
 
@@ -47,6 +48,9 @@ class ShortURL(models.Model):
             url=self.url,
             code=self.code,
         )
+
+    def get_absolute_url(self) -> str:
+        return reverse("shortener:detail-short-url", kwargs={"pk": self.pk})
 
     @classmethod
     def get_object_or_none(cls, **filters) -> Self | None:  # noqa:ANN003

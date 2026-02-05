@@ -17,4 +17,7 @@ urlpatterns = [
         name="create-short-url-done",
     ),
     path("short-url/list/", views.ListShortURL.as_view(), name="list-short-url"),
+    path(
+        "short-url/<int:pk>/", views.DetailShortURL.as_view(), name="detail-short-url"
+    ),
 ]

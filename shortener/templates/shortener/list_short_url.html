@@ -18,7 +18,7 @@
             <div class="short-url-card">
                 <div class="short-url-card-main-info">
                     <h3 class="short-url-card-short-url-name">
-                        {{url.title}}
+                        <a class="short-url-card-detail-url" href="{{ url.get_absolute_url }}">{{url.title}}</a>
                     </h3>
                     <div class="short-url-card-short-url">
                         {% with short_url='http://127.0.0.1:8000/u/'|add:url.code|add:'/' %}

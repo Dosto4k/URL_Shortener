@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import (
     CreateView,
+    DetailView,
     ListView,
     RedirectView,
     TemplateView,
@@ -74,4 +75,11 @@ class ListShortURL(LoginRequiredMixin, ListView):
     paginate_by = 4
 
     def get_queryset(self) -> QuerySet[Any]:
+        return ShortURL.objects.filter(owner=self.request.user)
+
+
+class DetailShortURL(LoginRequiredMixin, DetailView):
+    template_name = "shortener/detail_short_url.html"
+
+    def get_queryset(self) -> QuerySet[ShortURL]:
         return ShortURL.objects.filter(owner=self.request.user)
