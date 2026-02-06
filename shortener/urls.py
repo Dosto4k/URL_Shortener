@@ -25,4 +25,9 @@ urlpatterns = [
         views.ChangeShortURL.as_view(),
         name="change-short-url",
     ),
+    path(
+        "short_url/<int:pk>/delete/",
+        views.DeleteShortURL.as_view(),
+        name="delete-short-url",
+    ),
 ]

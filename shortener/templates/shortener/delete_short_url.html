@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Детали короткой ссылки "{{object.title}}"{% endblock title %}
+{% block title %}Удаление короткой ссылки "{{object.title}}"{% endblock title %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static "shortener/css/style.css" %}">
@@ -10,7 +10,8 @@
 
 {% block content %}
 <div class="short-url-detail-container">
-    <h4 class="short-url-detail-h4">Детали ссылки</h4>
+    <h4 class="short-url-detail-h4">Подтверждение удаления</h4>
+    <p class="short-url-delete-warning">Вы действительно хотите удалить короткую ссылку?</p>
     <div class="short-url-detail-fields-container">
         <div class="short-url-detail-field-group">
             <label>Название:</label>
@@ -26,9 +27,11 @@
         </div>
     </div>
     <div class="short-url-detail-actions">
-        <a style="color: black" href="{% url "shortener:list-short-url" %}" class="short-url-action-button">↩</a>
-        <a href="{% url "shortener:change-short-url" object.pk %}" class="short-url-action-button">✏️</a>
-        <a href="{% url "shortener:delete-short-url" object.pk %}" class="short-url-action-button">🗑️</a>
+        <a style="color: black" href="{{ object.get_absolute_url }}" class="short-url-action-button">↩</a>
+        <form method="post" action="{% url "shortener:delete-short-url" object.pk %}">
+            {% csrf_token %}
+            <button type="submit" style="color: black" class="short-url-action-button">Удалить</a>
+        </form>
     </div>
 </div>
 {% endblock content %}

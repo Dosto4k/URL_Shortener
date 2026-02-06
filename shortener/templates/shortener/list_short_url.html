@@ -28,7 +28,7 @@
                 </div>
                 <div class="short-url-card-actions">
                     <a href="{% url "shortener:change-short-url" url.pk %}" class="short-url-action-button">✏️</a>
-                    <a href="#" class="short-url-action-button">🗑️</a>
+                    <a href="{% url "shortener:delete-short-url" url.pk %}" class="short-url-action-button">🗑️</a>
                 </div>
                 <div class="short-url-card-destination-url">
                     <p class="short-url-curved-arrow">⤷</p><a class="url" href="{{url.url}}">{{url.url}}</a>

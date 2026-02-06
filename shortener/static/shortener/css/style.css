@@ -525,3 +525,13 @@ html {
   margin-top: 10px;
   gap: 20px;
 }
+
+.short-url-delete-warning {
+  width: max-content;
+  max-width: 400px;
+  word-break: normal;
+  font-size: 2rem;
+  margin-top: 15px;
+  text-align: justify;
+  padding: 0px 20px;
+}

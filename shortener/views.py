@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import (
     CreateView,
+    DeleteView,
     DetailView,
     ListView,
     RedirectView,
@@ -92,3 +93,13 @@ class ChangeShortURL(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self) -> QuerySet[ShortURL]:
         return ShortURL.objects.filter(owner=self.request.user)
+
+
+class DeleteShortURL(LoginRequiredMixin, DeleteView):
+    template_name = "shortener/delete_short_url.html"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return ShortURL.objects.filter(owner=self.request.user)
+
+    def get_success_url(self) -> str:
+        return reverse("shortener:list-short-url")
