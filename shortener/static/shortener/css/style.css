@@ -480,9 +480,9 @@ html {
 }
 
 .page-link.active {
-    background-color: #007bff; /* Цвет активной кнопки */
-    color: white; /* Цвет текста активной кнопки */
-    border-color: #007bff; /* Цвет границы активной кнопки */
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
 }
 
 .page-link.disabled {
@@ -534,4 +534,27 @@ html {
   margin-top: 15px;
   text-align: justify;
   padding: 0px 20px;
+}
+
+.empty-short-urls {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  cursor: default;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-short-urls div {
+  font-size: 2.2rem;
+}
+
+.empty-short-urls div a {
+  color: #007bff;
+}
+
+.empty-short-urls div a:hover {
+  opacity: 0.7;
 }

@@ -11,6 +11,12 @@
 
 {% block content %}
 <div class="list-url-container">
+    {% if not object_list %}
+    <div class="empty-short-urls">
+        <div>У вас нет коротких ссылок.</div>
+        <div>Создать короткие ссылки можно <a href="{% url "shortener:create-short-url" %}">здесь</a>.</div>
+    </div>
+    {% else %}
     <h2 class="short-urls-title">Список коротких URL</h2>
     <div class="short-urls-container">
         {% for url in object_list %}
@@ -37,6 +43,7 @@
         </div>
         {% endfor %}
     </div>
+    {% if paginator.num_pages > 1 %}
     <div class="pagination-container">
         <ul class="paginator-block">
             <div class="paginator-left-side">
@@ -79,5 +86,7 @@
             </div>
         </ul>
     </div>
+    {% endif %}
+    {% endif %}
 </div>
 {% endblock content %}
