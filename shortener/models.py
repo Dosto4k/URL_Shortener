@@ -25,8 +25,10 @@ class ShortURL(models.Model):
         related_name="urls",
         verbose_name="Владелец",
     )
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
 
     class Meta:
+        ordering = ["-created_at"]
         verbose_name = "Короткая ссылка"
         verbose_name_plural = "Короткие ссылки"
         constraints = [

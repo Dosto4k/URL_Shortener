@@ -8,7 +8,7 @@ from shortener.services import generate_unique_code, get_url_title
 
 @admin.register(ShortURL)
 class ShortUrlAdmin(admin.ModelAdmin):
-    list_display = ["id", "title", "url", "code", "owner"]
+    list_display = ["id", "title", "url", "code", "created_at", "owner"]
     list_select_related = ["owner"]
 
     def save_model(
