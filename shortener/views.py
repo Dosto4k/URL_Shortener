@@ -14,10 +14,11 @@ from django.views.generic import (
     ListView,
     RedirectView,
     TemplateView,
+    UpdateView,
     View,
 )
 
-from shortener.forms import CreateShortUrlForm
+from shortener.forms import CreateShortUrlForm, UpdateShortURL
 from shortener.models import ShortURL
 
 
@@ -80,6 +81,14 @@ class ListShortURL(LoginRequiredMixin, ListView):
 
 class DetailShortURL(LoginRequiredMixin, DetailView):
     template_name = "shortener/detail_short_url.html"
+
+    def get_queryset(self) -> QuerySet[ShortURL]:
+        return ShortURL.objects.filter(owner=self.request.user)
+
+
+class ChangeShortURL(LoginRequiredMixin, UpdateView):
+    template_name = "shortener/change_short_url.html"
+    form_class = UpdateShortURL
 
     def get_queryset(self) -> QuerySet[ShortURL]:
         return ShortURL.objects.filter(owner=self.request.user)

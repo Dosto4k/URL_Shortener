@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Изменение ссылки "{{object.title}}"{% endblock title %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "shortener/css/style.css" %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="login-container">
+    <form class="login-form" action="{% url "shortener:change-short-url" object.pk %}" method="POST">
+        <h2>Изменить ссылку</h2>
+        {% if form.non_field_errors %}
+        {{form.non_field_errors}}
+        <br>
+        {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="input-group">
+            {{field.label_tag}}
+            {% if field.errors %}
+            {{field.errors}}
+            <br>
+            {% endif %}
+            {{field}}
+        </div>
+        {% endfor %}
+        <div id="block-field-preview" class="input-group">
+            <label for="preview-field">Как выглядит ваша ссылка:</label>
+            <input type="text" id="preview-field" name="preview-field" readonly>
+        </div>
+        <button type="submit" class="btn-login">Созранить</button>
+    </form>
+    <script src="{% static 'shortener/js/auto_field_filling.js' %}"></script>
+</div>
+{% endblock content %}

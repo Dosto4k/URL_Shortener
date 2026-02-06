@@ -30,3 +30,12 @@ class CreateShortUrlForm(forms.ModelForm):
             "title": "Название (Не обязательно)",
             "code": "URL код (Не обязательно)",
         }
+
+
+class UpdateShortURL(CreateShortUrlForm):
+    class Meta(CreateShortUrlForm.Meta):
+        model = ShortURL
+        labels = {
+            "title": "Название",
+            "code": "URL код",
+        }

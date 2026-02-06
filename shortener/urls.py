@@ -20,4 +20,9 @@ urlpatterns = [
     path(
         "short-url/<int:pk>/", views.DetailShortURL.as_view(), name="detail-short-url"
     ),
+    path(
+        "short-url/<int:pk>/change/",
+        views.ChangeShortURL.as_view(),
+        name="change-short-url",
+    ),
 ]
